@@ -2,7 +2,7 @@ package algorithm.a10158;
 
 import java.util.Scanner;
 
-public class Main2 {
+public class Main_Org {
 
     public static final long MAX_POS = 40000;
     public static final long MIN_POS = 2;
@@ -88,7 +88,7 @@ public class Main2 {
 		Scanner input = new Scanner(System.in);
 		try
 		{
-			Main2 ex = new Main2();
+			Main_Org ex = new Main_Org();
 			ex.inputMaxPosition(input);
 			ex.inputCurrPosition(input);
 			ex.inputTime(input);
