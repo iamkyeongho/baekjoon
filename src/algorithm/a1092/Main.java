@@ -65,7 +65,7 @@ public class Main {
 					break;
 				}
 				// 크레인 허용무게보다 박스 무게가 작거나 같으면 박스 무게 삭제.
-				// 위치는 boxMoveCount
+				// 위치는 boxIndex
 				else if (crain_weight.get(i) >= box_weight.get(boxIndex))
 				{
 					box_weight.remove(boxIndex);

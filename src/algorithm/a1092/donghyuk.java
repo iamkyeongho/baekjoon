@@ -1,71 +1,70 @@
 package algorithm.a1092;
 
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.StringTokenizer;
 
-public class donghyuk {
-	
+public class donghyuk 
+{
 	public static void main(String[] args) throws IOException
 	{
 		BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+		
 		StringTokenizer st = new StringTokenizer(bf.readLine());
 		int crain_num = Integer.parseInt(st.nextToken());
 		
 		st = new StringTokenizer(bf.readLine());
-		Integer [] crain_weight = new Integer[crain_num+1]; 		
-		for(int i = 1; i <= crain_num; i++)
+		int [] crain_weight = new int[crain_num]; 
+		for(int i = 0; i < crain_num; i++)
 		{
 			crain_weight[i] = Integer.parseInt(st.nextToken());
 		}
-		Arrays.sort(crain_weight, 1, crain_num, Collections.reverseOrder());
+		Arrays.sort(crain_weight);
 		
 		st = new StringTokenizer(bf.readLine());
 		int box_num = Integer.parseInt(st.nextToken());
-
+		
 		st = new StringTokenizer(bf.readLine());
-		Integer []box_weight = new Integer[box_num+1];		
-		for(int i = 1; i <= box_num; i++)
+		int []box_weight = new int[box_num];		
+		for(int i = 0; i < box_num; i++)
 		{
 			box_weight[i] = Integer.parseInt(st.nextToken());
 		}
-		Arrays.sort(box_weight, 1, box_num, Collections.reverseOrder());
+		Arrays.sort(box_weight);
 		
-		int squen = 1;
-		int max=1;
-		int result = 0;
-		boolean  IsMove = true;
-		for(int i = 1; i <= box_num; i++)
+		int result = 0;		
+		if (crain_weight[crain_num-1] < box_weight[box_num-1]) 
 		{
-			squen = (squen <= crain_num) ? squen: (crain_weight[squen-1] < box_weight[i]) ? squen : max; 
-			for(int j = squen; j <= crain_num; j++)
-			{
-				if(crain_weight[j] >= box_weight[i])
-				{
-					result =((crain_num == squen)||(box_num==i)||(crain_num == j))? result+1 : result;
-					squen = j+1;
-					break;
-				}
-				else if(box_weight[i] > crain_weight[crain_num])
-				{
-					IsMove =false;
-					break;
-				}
-				else
-				{
-					max = j+1;
-				}
-			}
-			if(!IsMove) 
-			{
-				result = -1;
-				break;
-			}
+			result = -1;
+			System.out.println(result);
+			return;
 		}
-		System.out.print(result);
+		
+		boolean [] BoxCheck = new boolean[box_num];
+		int count = box_num;
+		while(count > 0)
+		{		
+			int boxIndex = box_num - 1;
+			for(int i=crain_num-1; i >=0;)
+			{
+				if (boxIndex < 0) 
+				{
+					break;
+				}
+				else if(!BoxCheck[boxIndex] &&
+						crain_weight[i] >= box_weight[boxIndex])			
+				{
+					i--;
+					count--;
+					BoxCheck[boxIndex] = true;
+				}
+				boxIndex--;
+			} 
+			result++;;
+		}
+		
+		System.out.println(result);
 	}
 }
